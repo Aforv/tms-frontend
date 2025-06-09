@@ -11,7 +11,7 @@ import Monthly from "./components/Dashboard/Reports/Monthly";
 import Attendenceform from "./components/attendence/Attendenceform";
 import AttendenceDataTable from "./components/attendence/AttendenceDataTable";
 import { CandidateScreen } from "./components/Candidate/CandidateScreen";
-
+import HourlyTasks from "./components/hourly_tasks/HourlyTasks";
 
 function App() {
   return (
@@ -27,7 +27,7 @@ function App() {
           <Route path="/attendenceform" element={<Attendenceform/>} />
           <Route path="/attendencetable" element={<AttendenceDataTable />} />
           <Route path="/candidate" element={<CandidateScreen></CandidateScreen>}/>
-       
+          <Route path="/hourlytasks" element={<HourlyTasks/>} />
         </Routes>
         </div>
       </Layout>

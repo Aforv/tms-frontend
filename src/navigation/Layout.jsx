@@ -182,8 +182,9 @@ export default function Layout({ children }) {
       ],
     },
     { name: "Profile", icon: HiUser, path: "/profile" },
+    { name: "Hourly Tasks", icon: HiUser, path: "/hourlytasks" },
     { name: "Attendance", icon: HiBookOpen, path: "/attendenceform" },
-        { name: "Candidate", icon: HiAcademicCap, path: "/Candidate" },
+    { name: "Candidate", icon: HiAcademicCap, path: "/Candidate" },
 
   ];
 
@@ -191,7 +192,7 @@ export default function Layout({ children }) {
 
   return (
     <div className="flex h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
-      {/* Sidebar */}
+     
       <div
         className="transition-width duration-[500ms] ease-in-out border-r shadow-lg h-full flex flex-col bg-white dark:bg-gray-800 border-gray-200 dark:border-gray-700"
         style={{ width: collapsed ? "60px" : "256px" }}
