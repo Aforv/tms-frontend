@@ -10,6 +10,7 @@ import {
   HiChevronDown,
   HiMoon,
   HiSun,
+  HiBookOpen,
   HiAcademicCap
 } from "react-icons/hi";
 
@@ -181,6 +182,7 @@ export default function Layout({ children }) {
       ],
     },
     { name: "Profile", icon: HiUser, path: "/profile" },
+    { name: "Attendance", icon: HiBookOpen, path: "/attendenceform" },
         { name: "Candidate", icon: HiAcademicCap, path: "/Candidate" },
 
   ];
