@@ -10,7 +10,8 @@ import {
   HiChevronDown,
   HiMoon,
   HiSun,
-  HiBookOpen
+  HiBookOpen,
+  HiAcademicCap
 } from "react-icons/hi";
 
 function UserProfileMenu() {
@@ -182,6 +183,8 @@ export default function Layout({ children }) {
     },
     { name: "Profile", icon: HiUser, path: "/profile" },
     { name: "Attendance", icon: HiBookOpen, path: "/attendenceform" },
+        { name: "Candidate", icon: HiAcademicCap, path: "/Candidate" },
+
   ];
 
   const activeMenuName = findActiveMenuName(menuItems, location.pathname) || "Dashboard";
