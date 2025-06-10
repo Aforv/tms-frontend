@@ -186,7 +186,11 @@ export default function Layout({ children }) {
     { name: "Hourly Tasks", icon: HiUser, path: "/hourlytasks" },
     { name: "Attendance", icon: HiBookOpen, path: "/attendenceform" },
     { name: "Candidate", icon: HiAcademicCap, path: "/Candidate" },
-    { name: "Status History", icon: HiStatusOnline, path: "/statushistory" },
+    {
+      name: "Internal Interview",
+      icon: HiUser, path: "/internalinterview"
+     }
+    { name: "Status History", icon: HiStatusOnline, path: "/statushistory" }
   ];
 
   const activeMenuName = findActiveMenuName(menuItems, location.pathname) || "Dashboard";
