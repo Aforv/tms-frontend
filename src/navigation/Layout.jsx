@@ -185,7 +185,9 @@ export default function Layout({ children }) {
     { name: "Hourly Tasks", icon: HiUser, path: "/hourlytasks" },
     { name: "Attendance", icon: HiBookOpen, path: "/attendenceform" },
     { name: "Candidate", icon: HiAcademicCap, path: "/Candidate" },
-
+    {
+      name: "Internal Interview",
+      icon: HiUser, path: "/internalinterview",}
   ];
 
   const activeMenuName = findActiveMenuName(menuItems, location.pathname) || "Dashboard";
