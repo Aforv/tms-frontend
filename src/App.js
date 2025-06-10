@@ -7,6 +7,7 @@ import AttendenceDataTable from "./components/attendence/AttendenceDataTable";
 import { CandidateScreen } from "./components/Candidate/CandidateScreen";
 import HourlyTasks from "./components/hourly_tasks/HourlyTasks";
 import InternalInterview from "./components/internalInterview/InternalInterview";
+import { StatusHistoryScreen } from "./components/statushistory/StatusHistoryScreen";
 
 function App() {
   return (
@@ -14,12 +15,15 @@ function App() {
       <Layout>
         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-5"> 
         <Routes>
+          <Route path="/dashboard/overview" element={<Overview />} />
+          <Route path="/dashboard/reports/daily" element={<Daily />} />
+          <Route path="/dashboard/reports/monthly" element={<Monthly />} />
           <Route path="/attendenceform" element={<Attendenceform/>} />
           <Route path="/attendencetable" element={<AttendenceDataTable />} />
           <Route path="/candidate" element={<CandidateScreen></CandidateScreen>}/>
           <Route path="/hourlytasks" element={<HourlyTasks/>} />
           <Route path="/internalinterview" element={<InternalInterview/>} />
-
+          <Route path="/statushistory" element={<StatusHistoryScreen/>}/>
         </Routes>
         </div>
       </Layout>
