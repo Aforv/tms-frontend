@@ -57,7 +57,7 @@ function InternalInterview() {
     const [data, setData] = useState([
         {
             id: 1,
-            scheduledat: '2024-06-01T17:00',
+            scheduledat: '2024-06-01',
             result: 'Pass',
             technicalassessment: 'Pending',
             behavioralnotes: 'improve',
@@ -65,7 +65,7 @@ function InternalInterview() {
         },
         {
             id: 2,
-            scheduledat: '2024-06-01T17:00',
+            scheduledat: '2024-06-01',
             result: 'Pending',
             technicalassessment: 'Pending',
             behavioralnotes: 'improve',
@@ -73,7 +73,7 @@ function InternalInterview() {
         },
         {
             id: 3,
-            scheduledat: '2024-06-01T17:00',
+            scheduledat: '2024-06-01',
             result: 'Fail',
             technicalassessment: 'Pending',
             behavioralnotes: 'improve',
@@ -170,11 +170,11 @@ function InternalInterview() {
             .includes(filterText.toLowerCase())
     );
     const columns = [
-        { name: 'scheduledat', selector: (row) => row.scheduledat, sortable: true },
-        { name: 'result', selector: (row) => row.result, sortable: true },
-        { name: 'technicalassessment', selector: (row) => row.technicalassessment, sortable: true },
-        { name: 'behavioralnotes', selector: (row) => row.behavioralnotes, sortable: true },
-        { name: 'nextstep', selector: (row) => row.nextstep, sortable: true },
+        { name: 'Schedule Date', selector: (row) => row.scheduledat, sortable: true },
+        { name: 'Result', selector: (row) => row.result, sortable: true },
+        { name: 'Tech Assessment', selector: (row) => row.technicalassessment, sortable: true },
+        { name: 'Behavioral Notes', selector: (row) => row.behavioralnotes, sortable: true },
+        { name: 'NextStep', selector: (row) => row.nextstep, sortable: true },
         {
             name: 'Actions',
             cell: (row) => (
@@ -255,7 +255,7 @@ function InternalInterview() {
                                     <div>
                                         <Label htmlFor="scheduledat">scheduled At</Label>
                                         <input
-                                            type="datetime-local"
+                                            type="date"
                                             id="scheduledat"
                                             name="scheduledat"
                                             value={formData.scheduledat}
