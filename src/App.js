@@ -12,6 +12,7 @@ import Overview from "./components/Dashboard/Overview";
 import Monthly from "./components/Dashboard/Reports/Monthly";
 import Daily from "./components/Dashboard/Reports/Daily";
 import TlEvaluationForm from "./components/tlEvaluation/TlEvaluationForm";
+import ExternalInterview from "./components/externalinterview/ExternaInterview";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
           <Route path="/internalinterview" element={<InternalInterview/>} />
           <Route path="/statushistory" element={<StatusHistoryScreen/>}/>
           <Route path="/tlevaluation" element={<TlEvaluationForm/>} />
+          <Route path="/externalinterview" element={<ExternalInterview/>} />
         </Routes>
         </div>
       </Layout>
