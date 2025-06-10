@@ -322,7 +322,7 @@ export function StatusHistoryScreen() {
               }}
               className="bg-gradient-to-l from-blue-500 to-blue-700 text-white"
             >
-              +Status
+              +Status History
             </Button>
           </div>
         </div>

@@ -3,7 +3,6 @@
 import { Route, Routes } from "react-router-dom";
 // import Home from "./components/Home";
 import ProfilePage from "./components/ProfilePage";
-// import ProfilePage from "./components/ProfilePage";
 import Layout from "./navigation/Layout";
 import Overview from "./components/Dashboard/Overview";
 import Daily from "./components/Dashboard/Reports/Daily";
@@ -29,7 +28,7 @@ function App() {
           <Route path="/attendencetable" element={<AttendenceDataTable />} />
           <Route path="/candidate" element={<CandidateScreen></CandidateScreen>}/>
           <Route path="/hourlytasks" element={<HourlyTasks/>} />
-          <Route path="/status" element={<StatusHistoryScreen/>}/>
+          <Route path="/statushistory" element={<StatusHistoryScreen/>}/>
         </Routes>
         </div>
       </Layout>
