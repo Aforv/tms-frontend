@@ -11,7 +11,8 @@ import {
   HiMoon,
   HiSun,
   HiBookOpen,
-  HiAcademicCap
+  HiAcademicCap,
+  HiStatusOnline      
 } from "react-icons/hi";
 
 function UserProfileMenu() {
@@ -185,7 +186,7 @@ export default function Layout({ children }) {
     { name: "Hourly Tasks", icon: HiUser, path: "/hourlytasks" },
     { name: "Attendance", icon: HiBookOpen, path: "/attendenceform" },
     { name: "Candidate", icon: HiAcademicCap, path: "/Candidate" },
-
+    { name: "Status History", icon: HiStatusOnline, path: "/statushistory" },
   ];
 
   const activeMenuName = findActiveMenuName(menuItems, location.pathname) || "Dashboard";
