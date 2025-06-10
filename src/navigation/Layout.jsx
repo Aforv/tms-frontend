@@ -12,7 +12,8 @@ import {
   HiSun,
   HiBookOpen,
   HiAcademicCap,
-  HiStatusOnline      
+  HiStatusOnline,  
+  HiChip   
 } from "react-icons/hi";
 
 function UserProfileMenu() {
@@ -188,7 +189,8 @@ export default function Layout({ children }) {
     { name: "Candidate", icon: HiAcademicCap, path: "/Candidate" },
     {name: "Internal Interview",icon: HiUser, path: "/internalinterview"},
     { name: "Status History", icon: HiStatusOnline, path: "/statushistory" },
-    { name: "TL Evaluation", icon: HiDocumentReport, path: "/tlEvaluation" }
+    { name: "TL Evaluation", icon: HiDocumentReport, path: "/tlEvaluation" },
+    { name: "External Interview", icon:  HiChip, path: "/externalinterview" }
   ];
 
   const activeMenuName = findActiveMenuName(menuItems, location.pathname) || "Dashboard";
