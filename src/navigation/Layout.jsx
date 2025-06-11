@@ -15,7 +15,8 @@ import {
   HiStatusOnline,  
   HiChip,
   HiMailOpen,
-  HiPresentationChartBar  
+  HiPresentationChartBar,
+  HiPuzzle 
 } from "react-icons/hi";
 
 function UserProfileMenu() {
@@ -194,7 +195,8 @@ export default function Layout({ children }) {
     { name: "TL Evaluation", icon: HiDocumentReport, path: "/tlEvaluation" },
     { name: "External Interview", icon:  HiChip, path: "/externalinterview" },
     { name: "HR Process", icon:   HiMailOpen, path: "/hrprocess" },
-    { name: "Mentor Review", icon: HiPresentationChartBar, path: "/mentorreview" }
+    { name: "Mentor Review", icon: HiPresentationChartBar, path: "/mentorreview" },
+    { name: "GAP FILLING", icon: HiPuzzle, path: "/gapfilling" },
   ];
 
   const activeMenuName = findActiveMenuName(menuItems, location.pathname) || "Dashboard";

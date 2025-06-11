@@ -15,6 +15,7 @@ import TlEvaluationForm from "./components/tlEvaluation/TlEvaluationForm";
 import ExternalInterview from "./components/externalinterview/ExternaInterview";
 import { HrProcessScreen } from "./components/hrprocess/HrProcessScreen";
 import { MentorReviewScreen } from "./components/mentor/MentorReviewScreen";
+import GapFillingForm from "./components/gapFilling/GapFillingForm";
 function App() {
   return (
     <>     
@@ -34,6 +35,7 @@ function App() {
           <Route path="/externalinterview" element={<ExternalInterview/>} />
           <Route path="/hrprocess" element={<HrProcessScreen/>} />
           <Route path="/mentorreview" element={<MentorReviewScreen/>} />
+          <Route path="/gapfilling" element={<GapFillingForm/>} />
         </Routes>
         </div>
       </Layout>
