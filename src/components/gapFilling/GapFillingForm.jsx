@@ -6,7 +6,6 @@ import {
     Modal,
     ModalHeader,
     ModalBody,
-    Radio,
 } from "flowbite-react";
 import {
     HiSearch,
@@ -15,6 +14,7 @@ import {
     HiDotsVertical,
     HiX,
     HiDocumentReport,
+    HiPuzzle,
 } from "react-icons/hi";
 import { useState } from "react";
 import DataTable from "react-data-table-component";
@@ -22,51 +22,42 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const initialFormState = {
-            userId: "",
-            tlId: "",
-            weeklySummary: "",
-            skillRatings: "",
-            evalPeriodStart: "",
-            evalPeriodEnd: "",
-            promotionRecommended: "",   
+    userId: "",
+    identifiedGaps: "",
+    trainingPlan: "",
+    startDate: "",
+    targetCompletionDate: "",
+    gapFillStatus: "",
+    retryAttempt: "",
 };
 
-function TlEvaluationForm() {
+function GapFillingForm() {
     const [isOpen, setIsOpen] = useState(false);
     const [form, setForm] = useState(initialFormState);
     const [filterText, setFilterText] = useState("");
 
-    const [userIds, setUserIds] = useState([    
+    const [userIds, setUserIds] = useState([
         { id: 1, userId: "101" },
         { id: 2, userId: "102" },
         { id: 3, userId: "103" },
     ]);
     const [selectedUserIds, setSelectedUserIds] = useState("");
 
-
-    const [tlIds, setTlIds] = useState([    
-        { id: 1, tlId: "201" },
-        { id: 2, tlId: "202" },
-        { id: 3, tlId: "203" },
-    ]);
-    const [selectedTlIds, setSelectedTlIds] = useState("");
-
-
     const [data, setData] = useState([
         {
-            id:"1",
+            id: "1",
             userId: "101",
-            tlId: "201",
-            weeklySummary: "In Progress",
-            skillRatings: "5",
-            evalPeriodStart: "9:00 AM",
-            evalPeriodEnd: "19:30 PM",
-            promotionRecommended: "Yes"
+            identifiedGaps: "2",
+            trainingPlan: "Intermediate",
+            startDate: "10-06-2025",
+            targetCompletionDate: "11-06-2025",
+            gapFillStatus: "InProgress",
+            retryAttempt: 1,
         },
     ]);
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [selectedDeleteId, setSelectedDeleteId] = useState(null);
-    const [isPromotion, setIsPromotion] = useState();
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setForm((prev) => ({ ...prev, [name]: value }));
@@ -75,39 +66,34 @@ function TlEvaluationForm() {
     const handleSubmit = (e) => {
         e.preventDefault();
         form.userId=selectedUserIds;
-        form.tlId = selectedTlIds;
-        form.promotionRecommended = isPromotion;
-        
         const fields = Object.entries(form);
         for (const [key, value] of fields) {
             if (!value) {
                 toast.error("Please fill all the fields");
                 return;
-            }
+            }  
         }
 
         if (form.id) {
             setData((prev) =>
                 prev.map((item) => (item.id === form.id ? { ...form } : item))
             );
-            toast.success("Evaluation updated successfully!");
+            toast.success("GapFilling Data updated successfully!");
         } else {
             const newId = data.length > 0 ? Math.max(...data.map((d) => d.id)) + 1 : 1;
-            
+
             setData((prev) => [...prev, { ...form, id: newId }]);
-            toast.success("Evaluation submitted successfully!");
+            toast.success("GapFilling Data submitted successfully!");
         }
 
         setForm(initialFormState);
         setSelectedUserIds(" ");
-        setSelectedTlIds(" ");
         setIsOpen(false);
     };
 
     const handleReset = () => {
         setForm(initialFormState);
         setSelectedUserIds(" ");
-        setSelectedTlIds(" ");
     };
 
     const handleDeleteClick = (id) => {
@@ -119,7 +105,7 @@ function TlEvaluationForm() {
         setData((prev) => prev.filter((user) => user.id !== selectedDeleteId));
         setDeleteModalOpen(false);
         setSelectedDeleteId(null);
-        toast.success("Evaluation deleted successfully!");
+        toast.success("Data deleted successfully!");
     };
 
     const cancelDelete = () => {
@@ -133,19 +119,20 @@ function TlEvaluationForm() {
     };
 
     const filteredItems = data.filter((item) =>
-        [item.userId, item.tlId, item.weeklySummary, item.skillRatings, item.evalPeriodStart, item.evalPeriodEnd, item.promotionRecommended]
+        [item.userId, item.identifiedGaps, item.trainingPlan, item.startDate, item.targetCompletionDate, item.gapFillStatus, item.retryAttempt]
             .join(" ")
             .toLowerCase()
             .includes(filterText.toLowerCase())
     );
 
     const columns = [
-        { name: "ID", selector: (row) => row.id, sortable: true, grow: 0.5, wrap: true,},
-        { name: "WEEKLY SUMMARY", selector: (row) => row.weeklySummary, sortable: true },
-        { name: "SKILL RATINGS", selector: (row) => row.skillRatings, sortable: true },
-        { name: "EVAL PERIOD START", selector: (row) => row.evalPeriodStart, sortable: true },
-        { name: "EVAL PERIOD END", selector: (row) => row.evalPeriodEnd, sortable: true },
-        { name: "PROMOTION RECOMMENDED", selector: (row) => row.promotionRecommended, sortable: true },
+        { name: "ID", selector: (row) => row.id, sortable: true, grow: 0.5, wrap: true, },
+        { name: "IDENTIFIED GAPS", selector: (row) => row.identifiedGaps, sortable: true },
+        { name: "TRAINING PLAN", selector: (row) => row.trainingPlan, sortable: true },
+        { name: "START DATE", selector: (row) => row.startDate, sortable: true },
+        { name: "COMPLETION DATE", selector: (row) => row.targetCompletionDate, sortable: true },
+        { name: "STATUS", selector: (row) => row.gapFillStatus, sortable: true },
+        { name: "RETRY ATTEMPT", selector: (row) => row.retryAttempt, sortable: true },
         {
             name: "ACTIONS",
             cell: (row) => (
@@ -182,7 +169,7 @@ function TlEvaluationForm() {
             style: {
                 fontSize: "14px",
                 color: "#111827",
-                width:"auto"
+                width: "auto"
             },
         },
         rows: {
@@ -211,9 +198,9 @@ function TlEvaluationForm() {
                     <div className="relative w-full max-w-sm h-screen bg-white shadow-lg p-6 overflow-y-auto transform transition-transform duration-300 translate-x-0">
                         <div className="relative mb-6">
                             <div className="flex items-center gap-2">
-                                <HiDocumentReport className="w-6 h-6 text-blue-600" />
+                                <HiPuzzle className="w-6 h-6 text-blue-600" />
                                 <h3 className="text-lg font-semibold">
-                                    Add TL EVALUATION
+                                    Add  Gap Filling Details
                                 </h3>
                             </div>
                             <button
@@ -227,95 +214,100 @@ function TlEvaluationForm() {
 
                         <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
-                                <Label htmlFor="status">Select User Id</Label>
+                                <Label htmlFor="userId">Select User ID</Label>
                                 <select
+                                    id="userId"
+                                    name="userId"
                                     value={selectedUserIds}
                                     onChange={(e) => setSelectedUserIds(e.target.value)}
-                                    className="border px-4 py-2 rounded w-full"
-                                    >
-                                    <option value="">-- Select UserIds --</option>
-                                    {userIds.map((userIdList) => (
-                                    <option key={userIdList.id} value={userIdList.userId}>
-                                        {userIdList.userId}
-                                    </option>
+                                    className="w-full border border-gray-300 px-4 py-2 rounded-lg text-sm"
+                                    
+                                >
+                                    <option value="">-- Select User ID --</option>
+                                    {userIds.map((user) => (
+                                        <option key={user.id} value={user.userId}>
+                                            {user.userId}
+                                        </option>
                                     ))}
                                 </select>
-                                </div>                            
-                                <div>
-                                <Label htmlFor="status">Select TL Id</Label>
-                                <select
-                                    value={selectedTlIds}
-                                    onChange={(e) => setSelectedTlIds(e.target.value)}
-                                    className="border px-4 py-2 rounded w-full"
-                                    >
-                                    <option value="">-- Select TLIds --</option>
-                                    {tlIds.map((tlIdList) => (
-                                    <option key={tlIdList.id} value={tlIdList.tlId}>
-                                        {tlIdList.tlId}
-                                    </option>
-                                    ))}
-                                </select>
-                                </div>                            
-                                <div>
-                                <Label htmlFor="weeklySummary">Weekly Summary</Label>
-                                <TextInput
-                                    id="weeklySummary"
-                                    name="weeklySummary"
-                                    type="text"
-                                    value={form.weeklySummary}
-                                    onChange={handleChange}
-                                />
-                                </div> 
-                                <div>
-                                <Label htmlFor="skillRatings">Skill Ratings</Label>
-                                <TextInput
-                                    id="skillRatings"
-                                    name="skillRatings"
-                                    type="text"
-                                    value={form.skillRatings}
-                                    onChange={handleChange}
-                                />
-                                </div>       
-                                <div>
-                                <Label htmlFor="evalPeriodStart">Evaluation Time Started</Label>
-                                <TextInput
-                                    id="evalPeriodStart"
-                                    name="evalPeriodStart"
-                                    type="time"
-                                    value={form.evalPeriodStart}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div>
-                                <Label htmlFor="evalPeriodEnd">Evaluation Time Started</Label>
-                                <TextInput
-                                    id="evalPeriodEnd"
-                                    name="evalPeriodEnd"
-                                    type="time"
-                                    value={form.evalPeriodEnd}
-                                    onChange={handleChange}
-                                />
-                            </div>
-                            <div>
-                                <Label htmlFor="promotionRecommended">Promotion Recommended</Label>
-                                <div className="flex max-w-md flex-col gap-4">
-                                    <div className="flex items-center gap-2">
-                                        <Radio name="isPromotion" 
-                                        value="YES"
-                                        onChange={(e)=>setIsPromotion(e.target.value)}
-                                         />
-                                        <Label htmlFor="yes">Yes</Label>
-                                    </div>
 
-                                    <div className="flex items-center gap-2">
-                                        <Radio  name="isPromotion" 
-                                        value="NO"
-                                        
-                                        onChange={(e)=>setIsPromotion(e.target.value)} />
-                                        <Label htmlFor="no">No</Label>
-                                    </div>
-                                </div>
-                            </div> 
+                            </div>
+
+                            <div>
+                                <Label htmlFor="identifiedGaps">Identified Gaps</Label>
+                                <TextInput
+                                    id="identifiedGaps"
+                                    name="identifiedGaps"
+                                    type="text"
+                                    value={form.identifiedGaps}
+                                    onChange={handleChange}
+                                    
+                                />
+                            </div>
+                            <div>
+                                <Label htmlFor="trainingPlan">Training Plan</Label>
+                                <TextInput
+                                    id="trainingPlan"
+                                    name="trainingPlan"
+                                    type="text"
+                                    value={form.trainingPlan}
+                                    onChange={handleChange}
+                                    
+                                />
+                            </div>
+                            <div>
+                                <Label htmlFor="startDate">Start Date</Label>
+                                <TextInput
+                                    id="startDate"
+                                    name="startDate"
+                                    type="date"
+                                    value={form.startDate}
+                                    onChange={handleChange}
+                                    
+                                />
+                            </div>
+                            <div>
+                                <Label htmlFor="targetCompletionDate">Target Completion Date</Label>
+                                <TextInput
+                                    id="targetCompletionDate"
+                                    name="targetCompletionDate"
+                                    type="date"
+                                    value={form.targetCompletionDate}
+                                    onChange={handleChange}
+                                    
+                                />
+                            </div>
+                            <div>
+                                <Label htmlFor="gapFillStatus">Select Status</Label>
+                                <select
+                                    id="gapFillStatus"
+                                    name="gapFillStatus"
+                                    className="w-full p-2.5 rounded-lg border border-gray-300 text-sm"
+                                    value={form.gapFillStatus}
+                                    onChange={handleChange}
+                                    
+                                >
+                                    <option value="">Select Status</option> {/* Default option */}
+                                    <option value="Not Started">Not Started</option>
+                                    <option value="In Progress">In Progress</option>
+                                    <option value="Completed">Completed</option>
+                                    <option value="Extended">Extended</option>
+                                </select>
+                            </div>
+
+
+                            <div>
+                                <Label htmlFor="retryAttempt">Retry attempt</Label>
+                                <TextInput
+                                    id="retryAttempt"
+                                    name="retryAttempt"
+                                    type="text"
+                                    value={form.retryAttempt}
+                                    onChange={handleChange}
+                                    
+                                />
+                            </div>
+
                             <div className="flex space-x-3">
                                 <Button type="submit" className="bg-blue-600 text-white">
                                     Submit
@@ -334,6 +326,7 @@ function TlEvaluationForm() {
                 <ModalHeader />
                 <ModalBody>
                     <div className="text-center">
+                        {/* <HiOutlineExclamationCircle className="mx-auto mb-4 h-14 w-14 text-gray-400" /> */}
                         <h3 className="mb-5 text-lg font-bold text-gray-500">
                             Are you sure you want to delete this record id {' '} <span >{selectedDeleteId}</span>?
 
@@ -351,14 +344,14 @@ function TlEvaluationForm() {
             </Modal>
 
 
-            {/* Evaluation Table */}
-            <div className="p-6 bg-white rounded-lg shadow-sm" style={{width:"100%"}} >
+            {/* Gap Filling Table */}
+            <div className="p-6 bg-white rounded-lg shadow-sm" style={{ width: "100%" }} >
 
                 <div className="flex items-center justify-between flex-wrap gap-4 mb-6">
                     {/* Left: Search */}
                     <TextInput
                         icon={HiSearch}
-                        placeholder="Search Evaluation..."
+                        placeholder="Search Gap filling..."
                         value={filterText}
                         onChange={(e) => setFilterText(e.target.value)}
                         className="w-64"
@@ -366,7 +359,7 @@ function TlEvaluationForm() {
 
                     {/* Center: Title */}
                     <div className="flex-1 text-center">
-                        <h1 className="text-xl font-bold text-blue-900 flex-1 text-center">TL Evaluation List</h1>
+                        <h1 className="text-xl font-bold text-blue-900 flex-1 text-center">Gap Filling List</h1>
                     </div>
 
                     {/* Right: Actions + Add Button */}
@@ -384,13 +377,13 @@ function TlEvaluationForm() {
                             }}
                             className="bg-gradient-to-r from-blue-500 to-blue-700 text-white px-0.5 py-0.5 rounded-lg shadow-md hover:shadow-lg transition-all"
                         >
-                            +Add Evaluation
+                            +Add Gap Filling Details
                         </Button>
                     </div>
                 </div>
 
                             
-                <DataTable style={{width:"100%"}}
+                <DataTable style={{ width: "100%" }}
                     columns={columns}
                     data={filteredItems}
                     pagination
@@ -406,4 +399,4 @@ function TlEvaluationForm() {
     );
 }
 
-export default TlEvaluationForm;
+export default GapFillingForm;
