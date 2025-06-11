@@ -13,7 +13,9 @@ import {
   HiBookOpen,
   HiAcademicCap,
   HiStatusOnline,  
-  HiChip   
+  HiChip,
+  HiMailOpen,
+  HiPresentationChartBar  
 } from "react-icons/hi";
 
 function UserProfileMenu() {
@@ -190,7 +192,9 @@ export default function Layout({ children }) {
     {name: "Internal Interview",icon: HiUser, path: "/internalinterview"},
     { name: "Status History", icon: HiStatusOnline, path: "/statushistory" },
     { name: "TL Evaluation", icon: HiDocumentReport, path: "/tlEvaluation" },
-    { name: "External Interview", icon:  HiChip, path: "/externalinterview" }
+    { name: "External Interview", icon:  HiChip, path: "/externalinterview" },
+    { name: "HR Process", icon:   HiMailOpen, path: "/hrprocess" },
+    { name: "Mentor Review", icon: HiPresentationChartBar, path: "/mentorreview" }
   ];
 
   const activeMenuName = findActiveMenuName(menuItems, location.pathname) || "Dashboard";

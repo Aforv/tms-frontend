@@ -13,7 +13,8 @@ import Monthly from "./components/Dashboard/Reports/Monthly";
 import Daily from "./components/Dashboard/Reports/Daily";
 import TlEvaluationForm from "./components/tlEvaluation/TlEvaluationForm";
 import ExternalInterview from "./components/externalinterview/ExternaInterview";
-
+import { HrProcessScreen } from "./components/hrprocess/HrProcessScreen";
+import { MentorReviewScreen } from "./components/mentor/MentorReviewScreen";
 function App() {
   return (
     <>     
@@ -31,6 +32,8 @@ function App() {
           <Route path="/statushistory" element={<StatusHistoryScreen/>}/>
           <Route path="/tlevaluation" element={<TlEvaluationForm/>} />
           <Route path="/externalinterview" element={<ExternalInterview/>} />
+          <Route path="/hrprocess" element={<HrProcessScreen/>} />
+          <Route path="/mentorreview" element={<MentorReviewScreen/>} />
         </Routes>
         </div>
       </Layout>
