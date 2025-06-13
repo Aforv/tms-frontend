@@ -16,12 +16,20 @@ import ExternalInterview from "./components/externalinterview/ExternaInterview";
 import { HrProcessScreen } from "./components/hrprocess/HrProcessScreen";
 import { MentorReviewScreen } from "./components/mentor/MentorReviewScreen";
 import GapFillingForm from "./components/gapFilling/GapFillingForm";
+import Login from "./components/authentication/Login";
+import ProtectedRoute from "./components/authentication/ProtectedRoute";
 function App() {
   return (
-    <>     
+    <>
+    <Routes>
+      <Route path="/login" element={<Login/>}/>
+      <Route path="/*" element={<ProtectedRoute>
       <Layout>
+        
         <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700 mt-5"> 
         <Routes>
+          <Route path="/" element={<HourlyTasks/>} />
+
           <Route path="/dashboard/overview" element={<Overview/>} />
           <Route path="/dashboard/reports/daily" element={<Daily />} />
           <Route path="/dashboard/reports/monthly" element={<Monthly />} />
@@ -36,11 +44,18 @@ function App() {
           <Route path="/hrprocess" element={<HrProcessScreen/>} />
           <Route path="/mentorreview" element={<MentorReviewScreen/>} />
           <Route path="/gapfilling" element={<GapFillingForm/>} />
+        
         </Routes>
         </div>
       </Layout>
+      </ProtectedRoute>
+}
+/>
+</Routes>
+
 
     </>
+  
   );
 }
 
